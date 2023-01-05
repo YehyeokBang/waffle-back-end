@@ -1,9 +1,11 @@
 package com.waffle.waffle.domain;
 
+import com.waffle.waffle.domain.DTO.FineDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -12,6 +14,7 @@ import java.util.Date;
 @Getter
 @Table(name = "fine")
 @Builder
+@DynamicInsert
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -37,5 +40,18 @@ public class Fine {
     // 벌금을 내는 이유 (00: 지각, 01: 결석, 10: 미제출)
     @Column(nullable = false)
     private String type;
+
+    // 벌금 납부 상태 (true: 납부, false: 미납)
+    @Column(columnDefinition = "boolean default false")
+    private boolean status;
+
+    public FineDTO toDTO() {
+        return FineDTO.builder()
+                .member(member)
+                .date(date)
+                .type(type)
+                .status(status)
+                .build();
+    }
 
 }
