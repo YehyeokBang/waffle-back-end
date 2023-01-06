@@ -43,11 +43,17 @@ public class Fine {
 
     // 벌금 납부 상태 (true: 납부, false: 미납)
     @Column(columnDefinition = "boolean default false")
-    private boolean status;
+    private Boolean status;
+
+    // status 설정
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
 
     public FineDTO toDTO() {
         return FineDTO.builder()
-                .member(member)
+                .id(id)
+                .memberId(member.getMemberId())
                 .date(date)
                 .type(type)
                 .status(status)

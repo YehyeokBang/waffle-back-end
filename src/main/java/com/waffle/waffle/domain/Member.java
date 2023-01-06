@@ -1,5 +1,7 @@
 package com.waffle.waffle.domain;
 
+import com.waffle.waffle.domain.DTO.FineDTO;
+import com.waffle.waffle.domain.DTO.MemberDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -53,6 +55,18 @@ public class Member implements UserDetails {
         return this.roles.stream()
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
+    }
+
+    public MemberDTO toDTO() {
+        return MemberDTO.builder()
+                .memberId(memberId)
+                .nickname(nickname)
+                .part(part)
+                // List<Fine> -> List<FineDTO>
+                .fines(fines.stream()
+                        .map(Fine::toDTO)
+                        .collect(Collectors.toList()))
+                .build();
     }
 
     // 계정의 고유한 값을 리턴

@@ -1,7 +1,10 @@
 package com.waffle.waffle.service;
 
+import com.waffle.waffle.domain.DTO.MemberDTO;
 import com.waffle.waffle.domain.DTO.TokenDTO;
+import com.waffle.waffle.domain.Member;
 import com.waffle.waffle.jwt.TokenProvider;
+import com.waffle.waffle.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -9,12 +12,15 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.security.Principal;
+
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class MemberService {
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final TokenProvider tokenProvider;
+    private final MemberRepository memberRepository;
 
     @Transactional
     public TokenDTO login(String memberId, String password) {
@@ -29,5 +35,11 @@ public class MemberService {
         // 3. 인증된 정보를 기반으로 JWT 토큰 생성 후 리턴
         TokenDTO tokenDTO = tokenProvider.createToken(authentication);
         return tokenDTO;
+    }
+
+    public MemberDTO info(Principal principal) {
+        String memberId = principal.getName();
+        Member member = memberRepository.findByMemberId(memberId).get();
+        return member.toDTO();
     }
 }
