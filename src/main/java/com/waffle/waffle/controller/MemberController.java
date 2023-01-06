@@ -20,20 +20,20 @@ import java.security.Principal;
 public class MemberController {
     private final MemberService memberService;
 
+    // 메인 페이지
+    @GetMapping("/main")
+    public ResponseEntity<String> main() {
+        return ResponseEntity.ok("메인 로그인 페이지");
+    }
+
     // 로그인, id와 pw가 저장된 request body를 자바 객체로 변환하고 로그인 과정에 사용
-    @PostMapping("/login")
+    @PostMapping("/main")
     // @RequestBody: HTTP Request Body 내용을 통째로 자바 객체로 변환해서 매핑된 메소드 파라미터로 전달
     public TokenDTO login(@RequestBody LoginDTO memberLoginRequestDto) {
         String memberId = memberLoginRequestDto.getMemberId();
         String password = memberLoginRequestDto.getPassword();
         TokenDTO tokenDTO = memberService.login(memberId, password);
         return tokenDTO;
-    }
-
-    // 메인 페이지
-    @GetMapping("/index")
-    public ResponseEntity<String> index() {
-        return ResponseEntity.ok("메인 페이지");
     }
 
     // 멤버 전용 페이지
