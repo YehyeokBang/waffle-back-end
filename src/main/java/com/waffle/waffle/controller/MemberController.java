@@ -20,9 +20,16 @@ import java.security.Principal;
 public class MemberController {
     private final MemberService memberService;
 
+
+    // 메인 페이지
+    @GetMapping("/")
+    public ResponseEntity<String> main() {
+        return ResponseEntity.ok("메인 로그인 페이지");
+    }
+
     // 메인 페이지
     @GetMapping("/main")
-    public ResponseEntity<String> main() {
+    public ResponseEntity<String> main2() {
         return ResponseEntity.ok("메인 로그인 페이지");
     }
 
