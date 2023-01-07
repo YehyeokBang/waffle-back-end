@@ -19,13 +19,7 @@ import java.security.Principal;
 @RequiredArgsConstructor
 public class MemberController {
     private final MemberService memberService;
-
-
-    // 메인 페이지
-    @GetMapping("/")
-    public ResponseEntity<String> main() {
-        return ResponseEntity.ok("메인 로그인 페이지");
-    }
+    
 
     // 메인 페이지
     @GetMapping("/main")
