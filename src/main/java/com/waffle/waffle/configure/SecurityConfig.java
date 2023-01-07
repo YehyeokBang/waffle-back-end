@@ -37,11 +37,11 @@ public class SecurityConfig {
                 // 시큐리티 처리에 HttpServletRequest를 이용함
                 .authorizeRequests()
                 // "/main"으로 시작하는 uri 요청은 별도의 인증 절차 없이 허용
-                .antMatchers("/main").permitAll()
+                .antMatchers("/main", "/admin").permitAll()
                 // "/member"로 시작하는 uri 요청은 인증 완료 후 [MEMBER, ADMIN] 이 중 하나 이상의 권한을 가진 사용자만 접근 허용
                 .antMatchers("/member").hasAnyRole("MEMBER", "ADMIN")
                 // "/admin" uri 요청은 인증 완료 후 [ADMIN] 권한을 가진 사용자만 접근 허용
-                .antMatchers("/admin").hasRole("ADMIN")
+                //.antMatchers("/admin").hasRole("ADMIN")
                 // 이외에 모든 uri 요청은 인증을 완료해야 접근 허용
                 .anyRequest().authenticated()
 
