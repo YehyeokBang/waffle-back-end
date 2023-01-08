@@ -35,6 +35,7 @@ public class SecurityConfig {
                 .and()
 
                 .formLogin()
+                .loginPage("/main")
                 .defaultSuccessUrl("/loginProcess")
 
                 .and()
