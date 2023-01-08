@@ -19,7 +19,6 @@ import java.security.Principal;
 @RequiredArgsConstructor
 public class MemberController {
     private final MemberService memberService;
-    
 
     // 메인 페이지
     @GetMapping("/main")
