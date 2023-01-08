@@ -11,7 +11,11 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 // waffle 원본
 
@@ -36,7 +40,8 @@ public class SecurityConfig {
 
                 .formLogin()
                 .loginPage("/main")
-                .defaultSuccessUrl("/loginProcess")
+                .failureUrl("/main")
+                .loginProcessingUrl("/loginProcess")
 
                 .and()
 
