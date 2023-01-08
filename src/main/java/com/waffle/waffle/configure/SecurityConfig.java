@@ -34,6 +34,11 @@ public class SecurityConfig {
 
                 .and()
 
+                .formLogin()
+                .defaultSuccessUrl("/loginProcess")
+
+                .and()
+
                 // 시큐리티 처리에 HttpServletRequest를 이용함
                 .authorizeRequests()
                 // "/main"으로 시작하는 uri 요청은 별도의 인증 절차 없이 허용
