@@ -1,6 +1,7 @@
 package com.waffle.waffle.configure;
 
 import com.waffle.waffle.jwt.JwtFilter;
+import com.waffle.waffle.jwt.MySimpleUrlAuthenticationSuccessHandler;
 import com.waffle.waffle.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -40,6 +41,7 @@ public class SecurityConfig {
 
                 .formLogin()
                 .loginPage("/main")
+                .defaultSuccessUrl("loginProcess", true)
                 .failureUrl("/main")
                 .loginProcessingUrl("/loginProcess")
 
@@ -68,4 +70,10 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
+
+    @Bean
+    public AuthenticationSuccessHandler myAuthenticationSuccessHandler(){
+        return new MySimpleUrlAuthenticationSuccessHandler();
+    }
+
 }
