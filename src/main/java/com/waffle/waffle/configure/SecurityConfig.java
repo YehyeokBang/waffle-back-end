@@ -44,6 +44,7 @@ public class SecurityConfig {
                 .defaultSuccessUrl("loginProcess", true)
                 .failureUrl("/main")
                 .loginProcessingUrl("/loginProcess")
+                .successHandler(myAuthenticationSuccessHandler())
 
                 .and()
 
@@ -71,9 +72,9 @@ public class SecurityConfig {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
+
     @Bean
     public AuthenticationSuccessHandler myAuthenticationSuccessHandler(){
         return new MySimpleUrlAuthenticationSuccessHandler();
     }
-
 }
