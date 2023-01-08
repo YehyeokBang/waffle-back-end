@@ -34,19 +34,6 @@ public class MemberController {
         return tokenDTO;
     }
 
-    // 권한에 따른 페이지 이동
-    @RequestMapping("/loginProcess")
-    public String loginProcess(Authentication authentication) {
-        String role = authentication.getAuthorities().toString();
-
-        if(role.equals("ADMIN")) {
-            return "redirect:admin";
-        }
-        else {
-            return "redirect:member";
-        }
-    }
-
     // 멤버 전용 페이지
     @GetMapping("/member")
     public ResponseEntity<MemberDTO> user(Principal principal) {
