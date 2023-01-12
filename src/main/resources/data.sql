@@ -78,4 +78,4 @@ values ('hyesungoh', 'ADMIN'),
 
 insert into fine(member_id, date, type)
 values ('yehyeokbang', '2023-01-02', '10'),
-       ('yimjeongyeon', '2023-01-03', '00');
+       ('yimjeongyeon', '2023-01-03', '01');
