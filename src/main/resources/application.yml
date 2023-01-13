@@ -2,8 +2,8 @@ spring:
   datasource:
     initialize: true
     url: jdbc:mysql://localhost:3306/waffle
-    username: root
-    password: ${DB_PASSWORD}
+    username: waffle
+    password:
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     database: mysql
