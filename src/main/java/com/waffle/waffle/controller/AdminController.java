@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,9 +47,6 @@ public class AdminController {
         if(fineRequestDto.getDate() == null) {
             throw new Exception("날짜 null");
         }
-        //if(!checkDate(new SimpleDateFormat("yyyy-MM-dd").format(fineRequestDto.getDate()))) {
-        //    throw new Exception("날짜 포맷 오류" + fineRequestDto.getDate().toString());
-        //}
         if(fineRequestDto.getType() == null) {
             throw new Exception("납부 사유 null");
         }
@@ -87,17 +83,5 @@ public class AdminController {
     public ResponseEntity<List<FineDTO>> adminList() {
         List<FineDTO> list = fineService.findAll();
         return ResponseEntity.ok(list);
-    }
-
-    // 날짜 형식 체크
-    public static boolean checkDate(String checkDate) {
-        try {
-            SimpleDateFormat dateFormatParser = new SimpleDateFormat("yyyy-MM-dd"); // 검증할 날짜 포맷 설정
-            dateFormatParser.setLenient(false); // false일경우 처리시 입력한 값이 잘못된 형식일 시 오류가 발생
-            dateFormatParser.parse(checkDate); // 대상 값 포맷에 적용되는지 확인
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
     }
 }
